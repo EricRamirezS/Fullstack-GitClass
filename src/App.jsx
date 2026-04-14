@@ -16,6 +16,43 @@ function App() {
       .map(path => jsonFiles[path].default || jsonFiles[path]);
 
     setCollaborators(loadedCollaborators);
+
+    const canvas = document.getElementById("matrixCanvas");
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = 250;
+
+    const letters = "01";
+    const fontSize = 12;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    const draw = () => {
+      ctx.fillStyle = "rgba(0, 40, 85, 0.08)"; // 🔵 azul institucional fade
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#FFB81C"; // 🟡 amarillo Duoc
+      ctx.font = fontSize + "px monospace";
+
+      drops.forEach((y, i) => {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const x = i * fontSize;
+
+        ctx.fillText(text, x, y * fontSize);
+
+        if (y * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      });
+    };
+
+    const interval = setInterval(draw, 60);
+    return () => clearInterval(interval);
   }, []);
 
   const uniqueSections = [...new Set(collaborators.map(c => c.Seccion).filter(Boolean))].sort();
@@ -27,16 +64,28 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="app-header">
-        <h1>Nuestros Colaboradores - Duoc UC</h1>
+
+      <header className="app-header matrix-enhanced">
+        <canvas id="matrixCanvas"></canvas>
+
+        <h1 className="glow-title">
+          Aquí se forjan los mejores desarrolladores FullStack
+        </h1>
+
         <div className="course-info">
-          <h2>Desarrollo FullStack III</h2>
-          <p className="course-subtitle">Clase: Estrategias de Branching y Gestión de Componentes</p>
+          <h2>Generación 2026 · Duoc UC</h2>
+          <p className="course-subtitle">
+            Desarrollo FullStack III — Estrategias de Branching y Gestión de Componentes
+          </p>
         </div>
-        <p className="institutional-motto">Integridad, Calidad, y Espíritu de Servicio.</p>
+
+        <p className="institutional-motto">
+          Código, disciplina y trabajo en equipo.
+        </p>
+
         <div className="quote-container">
           <p className="inspiration-quote">
-            "El código brillante se escribe en equipo. Cada rama es una idea y cada merge, un logro compartido."
+            "Cada commit cuenta una historia. Cada merge construye el legado."
           </p>
         </div>
       </header>

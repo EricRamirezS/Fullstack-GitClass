@@ -133,7 +133,7 @@ body {
   background-color: #002855;
   color: #FFFFFF;
   border-color: #002855;
-  box-shadow: 0 4px 6px rgba(0,40,85,0.2);
+  box-shadow: 0 4px 6px rgba(0, 40, 85, 0.2);
 }
 
 /* Collaborators Grid */
@@ -257,4 +257,43 @@ body {
 .app-footer p {
   opacity: 0.8;
   font-size: 0.9rem;
+}
+
+.matrix-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+#matrixCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.matrix-enhanced>*:not(canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+.glow-title {
+  text-shadow:
+    0 0 5px rgba(255, 184, 28, 0.6),
+    0 0 10px rgba(255, 184, 28, 0.4);
+}
+
+.glow-title {
+  animation: subtleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 184, 28, 0.4);
+  }
+
+  to {
+    text-shadow: 0 0 12px rgba(255, 184, 28, 0.8);
+  }
 }
