@@ -1,4 +1,4 @@
-# GitClass - Repositorio de Colaboradores Duoc UC 
+# GitClass - Repositorio de Colaboradores Duoc UC
 
 🔗 **Sitio Web en Vivo:** [https://fullstack-gitclass.onrender.com](https://fullstack-gitclass.onrender.com)
 
